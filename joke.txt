@@ -1,0 +1,1 @@
+Why did the Homework 5 shop agent refuse to pay the rent? It was still waiting for a human to say "yes" — and checking campus_customs_new.db for enough cash.

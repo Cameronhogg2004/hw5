@@ -1,0 +1,194 @@
+{
+  "database": "temporary copy of data/campus_customs.db (working copy untouched)",
+  "all_passed": true,
+  "checks": [
+    {
+      "check": "Pay without the board's human-gate token",
+      "expected": "refused",
+      "result": {
+        "ok": false,
+        "refused": true,
+        "reason": "Human approval gate not satisfied. Only the board's Approve button can pay."
+      },
+      "passed": true
+    },
+    {
+      "check": "Agent name as approver",
+      "expected": "refused",
+      "result": {
+        "ok": false,
+        "refused": true,
+        "reason": "approved_by must be the human who clicked Approve, not an agent."
+      },
+      "passed": true
+    },
+    {
+      "check": "Purchase while vendor has open invoice 501",
+      "expected": "refused",
+      "result": {
+        "ok": false,
+        "refused": true,
+        "reason": "Vendor still has open invoice(s) [501]; it will not ship. Approve the invoice payment first.",
+        "still_pending": true,
+        "ticket_id": 101
+      },
+      "passed": true
+    },
+    {
+      "check": "Pay invoice 501 after human approval",
+      "expected": "paid",
+      "result": {
+        "ok": true,
+        "approval_id": 1,
+        "payment_id": 1,
+        "kind": "invoice",
+        "amount": 840.0,
+        "approved_by": "Cameron",
+        "paid_at": "2026-08-31",
+        "checking_before": 3400.0,
+        "checking_after": 2560.0,
+        "effect": {
+          "invoice_id": 501,
+          "invoice_status": "paid"
+        },
+        "ticket_id": 101,
+        "ticket_status": "awaiting_approval"
+      },
+      "passed": true
+    },
+    {
+      "check": "Purchase after invoice is paid",
+      "expected": "paid",
+      "result": {
+        "ok": true,
+        "approval_id": 2,
+        "payment_id": 2,
+        "kind": "purchase",
+        "amount": 8.0,
+        "approved_by": "Cameron",
+        "paid_at": "2026-08-31",
+        "checking_before": 2560.0,
+        "checking_after": 2552.0,
+        "effect": {
+          "purchase_order_id": 1,
+          "status": "ordered",
+          "eta": "2026-09-05",
+          "note": "Inventory rises when the delivery arrives, not today."
+        },
+        "ticket_id": 101,
+        "ticket_status": "resolved"
+      },
+      "passed": true
+    },
+    {
+      "check": "Pay rent after human approval",
+      "expected": "paid",
+      "result": {
+        "ok": true,
+        "approval_id": 3,
+        "payment_id": 3,
+        "kind": "rent",
+        "amount": 2400.0,
+        "approved_by": "Cameron",
+        "paid_at": "2026-08-31",
+        "checking_before": 2552.0,
+        "checking_after": 152.0,
+        "effect": {
+          "lease_id": 1,
+          "paid_period_due": "2026-09-02",
+          "next_due": "2026-10-02"
+        },
+        "ticket_id": 102,
+        "ticket_status": "resolved"
+      },
+      "passed": true
+    },
+    {
+      "check": "Purchase bigger than checking (12 hoodies x $22 = $264 vs $152)",
+      "expected": "refused",
+      "result": {
+        "ok": false,
+        "refused": true,
+        "reason": "Not enough cash in checking (152.00) for 264.00. No money moved; the owner must pay this personally.",
+        "checking_balance": 152.0,
+        "ticket_id": 103,
+        "ticket_status": "needs_owner"
+      },
+      "passed": true
+    },
+    {
+      "check": "Pay the same approval twice",
+      "expected": "refused",
+      "result": {
+        "ok": false,
+        "refused": true,
+        "reason": "Approval 3 is already paid."
+      },
+      "passed": true
+    }
+  ],
+  "final_state": {
+    "cash": {
+      "account": "checking",
+      "balance": 152.0,
+      "as_of": "2026-08-31",
+      "pending_approvals_total": 0.0,
+      "balance_if_all_pending_paid": 152.0
+    },
+    "payments": [
+      {
+        "id": 1,
+        "kind": "invoice",
+        "ref_id": 501,
+        "amount": 840.0,
+        "account": "checking",
+        "paid_at": "2026-08-31",
+        "approved_by": "Cameron"
+      },
+      {
+        "id": 2,
+        "kind": "purchase",
+        "ref_id": 1,
+        "amount": 8.0,
+        "account": "checking",
+        "paid_at": "2026-08-31",
+        "approved_by": "Cameron"
+      },
+      {
+        "id": 3,
+        "kind": "rent",
+        "ref_id": 1,
+        "amount": 2400.0,
+        "account": "checking",
+        "paid_at": "2026-08-31",
+        "approved_by": "Cameron"
+      }
+    ],
+    "invoice_501": {
+      "id": 501,
+      "vendor_id": 1,
+      "amount": 840.0,
+      "due_date": "2026-08-28",
+      "status": "paid",
+      "description": "Rush reprint CC-TEE-WHITE S",
+      "vendor_name": "Bulldog Print Co",
+      "specialty": "apparel reprint",
+      "lead_days": 5,
+      "date_today": "2026-08-31",
+      "is_overdue": false,
+      "days_overdue": 0,
+      "blocks_new_shipments": false
+    },
+    "lease_1": {
+      "id": 1,
+      "space_name": "Chapel Street shop",
+      "landlord": "Elm City Properties",
+      "monthly_rent": 2400.0,
+      "next_due": "2026-10-02",
+      "notes": "Rent for 2026-09-02 paid 2026-08-31 (payment 3).",
+      "date_today": "2026-08-31",
+      "days_until_due": 32,
+      "is_overdue": false
+    }
+  }
+}

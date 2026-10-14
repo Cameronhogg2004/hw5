@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Campus Customs · Resolved Board</title>
+<style>
+  :root { --ink:#0f1035; --mythic:#ffd84a; --good:#31d17c; --display:'Burbank Big Condensed','Impact','Haettenschweiler','Arial Black',sans-serif; --body:'Avenir Next','Segoe UI',system-ui,sans-serif; }
+  body { margin:0; font-family:var(--body); color:#fff; background:linear-gradient(180deg,#1b2a8f,#3a67e8 40%,#7fc4ff); }
+  header { padding:24px 36px 6px; }
+  h1 { margin:0; font-family:var(--display); font-weight:normal; font-style:italic; font-size:48px; text-shadow:3px 3px 0 var(--ink); transform:skew(-6deg); }
+  header p { margin:6px 0 0; color:#dfe7ff; max-width:1100px; line-height:1.5; }
+  .totals { display:flex; gap:12px; flex-wrap:wrap; margin:14px 0 0; }
+  .totals span { font-family:var(--display); letter-spacing:1px; font-size:18px; padding:6px 14px; border-radius:8px; background:rgba(10,12,60,.6); border:2px solid rgba(255,255,255,.25); }
+  .totals b { color:var(--mythic); font-weight:normal; }
+  section { margin:22px 36px; padding:18px 20px 22px; border-radius:14px; background:rgba(10,12,60,.78); border:3px solid rgba(255,255,255,.2); }
+  h2 { margin:0 0 4px; font-family:var(--display); font-weight:normal; font-style:italic; font-size:34px; }
+  h2 .vr { color:var(--good); font-size:22px; margin-left:10px; font-style:normal; letter-spacing:2px; }
+  .meta { color:#cfe0ff; margin:4px 0 12px; line-height:1.5; font-size:15px; }
+  img { width:100%; border-radius:10px; border:3px solid rgba(255,255,255,.35); display:block; }
+  code { background:rgba(0,0,0,.35); padding:1px 6px; border-radius:4px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>RESOLVED BOARD · FULL RUN</h1>
+  <p>These are screenshots of my React board (<code>frontend/</code>, running at <code>localhost:5173</code>) after the full run, taken once each ticket was resolved. Before the run I reset the database from the original. The agents ran on <code>gpt-5.6-luna</code> through Portkey, and I approved every payment myself on the board.</p>
+  <div class="totals">
+    <span>Start checking <b>$3,400.00</b></span>
+    <span>Invoice 501 <b>−$840.00</b></span>
+    <span>Tee reprint <b>−$8.00</b></span>
+    <span>Rent <b>−$2,400.00</b></span>
+    <span>Hoodie quote <b>$0.00</b></span>
+    <span>End checking <b>$152.00</b> = cash_accounts</span>
+  </div>
+</header>
+
+<section>
+  <h2>#101 · Bulldog tee <span class="vr">RESOLVED · VICTORY ROYALE</span></h2>
+  <div class="meta">Boss → Inventory → Accounting (invoice 501), then Boss → Customer Service. Two supply drops approved by Cameron Hogg: #1 invoice 501 $840 ($3,400 → $2,560) and #2 one-tee reprint $8 ($2,560 → $2,552, ETA 2026-09-05). The draft to Tauhid stays on the board, marked NOT SENT. Facilities was benched.</div>
+  <img src="screenshots/board_ticket_101.png" alt="Board showing ticket 101 resolved">
+</section>
+
+<section>
+  <h2>#102 · Rent due <span class="vr">RESOLVED · VICTORY ROYALE</span></h2>
+  <div class="meta">Boss → Facilities → Accounting. One supply drop approved by Cameron Hogg: #3 rent $2,400 to Elm City Properties ($2,552 → $152). Lease 1's next_due moved to 2026-10-02. Inventory and Customer Service were benched.</div>
+  <img src="screenshots/board_ticket_102.png" alt="Board showing ticket 102 resolved">
+</section>
+
+<section>
+  <h2>#103 · Bulk hoodie discount <span class="vr">RESOLVED · VICTORY ROYALE</span></h2>
+  <div class="meta">Boss → Accounting → Inventory, then Boss → Customer Service. Quote: 20 × Basic Hoodie Big Yale (M) at $52.20 = $1,044, 10% off, 57.9% margin. 8 on hand, 12 short, ETA 2026-09-05 if the club accepts. No purchase, so no cash moved (checking stays $152). Facilities was benched.</div>
+  <img src="screenshots/board_ticket_103.png" alt="Board showing ticket 103 resolved">
+</section>
+</body>
+</html>

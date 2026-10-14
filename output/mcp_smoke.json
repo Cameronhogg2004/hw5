@@ -1,0 +1,112 @@
+{
+  "ran_at": "2026-10-13T23:43:56-04:00",
+  "database": "data/campus_customs_new.db",
+  "connection": ".mcp.json -> campus-customs (stdio)",
+  "results": [
+    {
+      "prompt": "Use the campus-customs MCP tool check_inventory to see how many Classic Bulldog Tees we have in size S for ticket 101.",
+      "tool": "check_inventory",
+      "args": {
+        "sku": "CC-TEE-WHITE",
+        "size": "S"
+      },
+      "tool_output": {
+        "sku": "CC-TEE-WHITE",
+        "size": "S",
+        "rows": [
+          {
+            "sku": "CC-TEE-WHITE",
+            "name": "Classic Bulldog Tee",
+            "size": "S",
+            "qty": 0,
+            "location": "Aisle B"
+          }
+        ],
+        "in_stock": false
+      },
+      "db_check": {
+        "query": "SELECT qty, location FROM inventory WHERE sku='CC-TEE-WHITE' AND size='S'",
+        "db_values": {
+          "qty": 0,
+          "location": "Aisle B"
+        },
+        "tool_values": {
+          "qty": 0,
+          "location": "Aisle B"
+        },
+        "matches": true
+      }
+    },
+    {
+      "prompt": "Call get_invoice on invoice 501 (linked to ticket 101) and tell me if it is overdue against the desk date.",
+      "tool": "get_invoice",
+      "args": {
+        "invoice_id": 501
+      },
+      "tool_output": {
+        "id": 501,
+        "vendor_id": 1,
+        "amount": 840.0,
+        "due_date": "2026-08-28",
+        "status": "open",
+        "description": "Rush reprint CC-TEE-WHITE S",
+        "vendor_name": "Bulldog Print Co",
+        "specialty": "apparel reprint",
+        "lead_days": 5,
+        "date_today": "2026-08-31",
+        "is_overdue": true,
+        "days_overdue": 3,
+        "blocks_new_shipments": true
+      },
+      "db_check": {
+        "query": "SELECT amount, due_date, status, (SELECT date_today FROM desk) AS date_today FROM invoices WHERE id=501",
+        "db_values": {
+          "amount": 840.0,
+          "due_date": "2026-08-28",
+          "status": "open",
+          "date_today": "2026-08-31"
+        },
+        "tool_values": {
+          "amount": 840.0,
+          "due_date": "2026-08-28",
+          "status": "open",
+          "date_today": "2026-08-31"
+        },
+        "matches": true
+      }
+    },
+    {
+      "prompt": "Call get_lease on lease 1 (ticket 102) and tell me the rent and how many days until it is due.",
+      "tool": "get_lease",
+      "args": {
+        "lease_id": 1
+      },
+      "tool_output": {
+        "id": 1,
+        "space_name": "Chapel Street shop",
+        "landlord": "Elm City Properties",
+        "monthly_rent": 2400.0,
+        "next_due": "2026-09-02",
+        "notes": null,
+        "date_today": "2026-08-31",
+        "days_until_due": 2,
+        "is_overdue": false
+      },
+      "db_check": {
+        "query": "SELECT monthly_rent, next_due, landlord FROM leases WHERE id=1",
+        "db_values": {
+          "monthly_rent": 2400.0,
+          "next_due": "2026-09-02",
+          "landlord": "Elm City Properties"
+        },
+        "tool_values": {
+          "monthly_rent": 2400.0,
+          "next_due": "2026-09-02",
+          "landlord": "Elm City Properties"
+        },
+        "matches": true
+      }
+    }
+  ],
+  "all_match": true
+}

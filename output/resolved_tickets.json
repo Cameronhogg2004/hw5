@@ -1,0 +1,222 @@
+{
+  "database": "data/campus_customs_new.db",
+  "desk_date": "2026-08-31",
+  "model": "gpt-5.6-luna (Portkey)",
+  "starting_checking": 3400.0,
+  "ending_checking": 152.0,
+  "tickets": [
+    {
+      "id": 101,
+      "type": "customer_order",
+      "requester": "Tauhid Zaman",
+      "final_status": "resolved",
+      "run_id": "run-101-0bc56a",
+      "short_outcome": "Tee in size S was out of stock (0). Overdue invoice 501 ($840) was blocking Bulldog Print Co, so Accounting queued it and Inventory queued a 1-unit reprint ($8). Cameron approved both. Invoice 501 is now paid, PO 1 is ordered with an ETA of 2026-09-05, and a reply draft to Tauhid is on the board, not sent.",
+      "agents_in_order": [
+        "boss",
+        "inventory",
+        "accounting",
+        "customer_service"
+      ],
+      "delegations": [
+        "boss -> inventory",
+        "inventory -> accounting",
+        "boss -> customer_service"
+      ],
+      "agent_contributions": {
+        "boss": "Coordinated the work and resolved the ticket to awaiting_approval.",
+        "inventory": "Ticket 101 has 0 of 1 Classic Bulldog Tee (CC-TEE-WHITE), size S, on hand in Aisle B, so the order is short 1. Bulldog Print Co is the correct apparel vendor but cannot ship while invoice 501 ($840, due 2026-08-28) remains open; accounting prepared payment approval 1, and I prepared the exact 1-unit restock for purchase approval 2 ($8.00).",
+        "accounting": "Prepared the $840.00 payment for Bulldog Print Co invoice 501. The invoice was open, blocking shipments, and 3 days overdue as of 2026-08-31; approval 1 is pending and no money has moved.",
+        "customer_service": "Saved draft reply 1 for Tauhid Zaman. It explains that 1 Classic Bulldog Tee in size S is currently out of stock, costs $28.00, and is expected around September 5, 2026 if the pending approvals are completed and the reprint is placed today."
+      },
+      "tools_used_by_agent": {
+        "boss": [
+          "get_ticket",
+          "resolve_ticket"
+        ],
+        "inventory": [
+          "check_inventory",
+          "list_vendors",
+          "get_desk_date",
+          "get_ticket",
+          "check_vendor_can_ship",
+          "prepare_purchase_order"
+        ],
+        "accounting": [
+          "get_invoice",
+          "get_desk_date",
+          "get_cash_balance",
+          "list_pending_approvals",
+          "prepare_invoice_payment"
+        ],
+        "customer_service": [
+          "get_ticket",
+          "list_drafts",
+          "get_pricing",
+          "create_draft_reply"
+        ]
+      },
+      "human_approvals": [
+        {
+          "approval_id": 1,
+          "kind": "invoice",
+          "amount": 840.0,
+          "description": "Pay invoice 501 to Bulldog Print Co ($840.00, due 2026-08-28)",
+          "prepared_by": "accounting",
+          "status": "paid",
+          "approved_by": "Cameron Hogg",
+          "payment_id": 1,
+          "checking_before": 3400.0,
+          "checking_after": 2560.0,
+          "approved_at": "2026-10-13T23:52:09-04:00"
+        },
+        {
+          "approval_id": 2,
+          "kind": "purchase",
+          "amount": 8.0,
+          "description": "Order 1 x CC-TEE-WHITE size S from Bulldog Print Co ($8.00 each, lead 5 days)",
+          "prepared_by": "inventory",
+          "status": "paid",
+          "approved_by": "Cameron Hogg",
+          "payment_id": 2,
+          "checking_before": 2560.0,
+          "checking_after": 2552.0,
+          "approved_at": "2026-10-13T23:52:13-04:00"
+        }
+      ],
+      "draft": {
+        "id": 1,
+        "recipient": "Tauhid Zaman",
+        "subject": "Your Classic Bulldog Tee order",
+        "status": "draft - not sent"
+      },
+      "usage": {
+        "requests": 16,
+        "tool_calls": 20,
+        "input_tokens": 32604,
+        "output_tokens": 2450
+      }
+    },
+    {
+      "id": 102,
+      "type": "rent_notice",
+      "requester": "Elm City Properties",
+      "final_status": "resolved",
+      "run_id": "run-102-c9d8d6",
+      "short_outcome": "Facilities confirmed lease 1 matches the notice ($2,400 to Elm City Properties, due 2026-09-02, 2 days away) and handed the payment to Accounting. Cameron approved the $2,400 rent and lease 1's next_due moved to 2026-10-02.",
+      "agents_in_order": [
+        "boss",
+        "facilities",
+        "accounting"
+      ],
+      "delegations": [
+        "boss -> facilities",
+        "facilities -> accounting"
+      ],
+      "agent_contributions": {
+        "boss": "Reviewed the rent notice, coordinated the work, and resolved the ticket to awaiting approval.",
+        "facilities": "Confirmed lease 1 for the Chapel Street shop matches the notice: landlord Elm City Properties, monthly rent $2,400, due 2026-09-02, which is 2 days from the 2026-08-31 desk date. Delegated payment preparation to Accounting; approval 3 is queued, and no money has moved.",
+        "accounting": "Prepared approval 3 for the $2,400 rent payment to Elm City Properties for the Chapel Street shop, due 2026-09-02\u20142 days from the 2026-08-31 desk date. Checking is $3,400 now and $2,552 after existing pending approvals, so the rent is covered; after this approval is paid, projected remaining cash is $152."
+      },
+      "tools_used_by_agent": {
+        "boss": [
+          "get_ticket",
+          "resolve_ticket"
+        ],
+        "facilities": [
+          "get_ticket",
+          "get_lease",
+          "get_desk_date",
+          "get_cash_balance"
+        ],
+        "accounting": [
+          "get_cash_balance",
+          "list_pending_approvals",
+          "prepare_rent_payment"
+        ]
+      },
+      "human_approvals": [
+        {
+          "approval_id": 3,
+          "kind": "rent",
+          "amount": 2400.0,
+          "description": "Pay rent for Chapel Street shop to Elm City Properties ($2400.00, due 2026-09-02)",
+          "prepared_by": "accounting",
+          "status": "paid",
+          "approved_by": "Cameron Hogg",
+          "payment_id": 3,
+          "checking_before": 2552.0,
+          "checking_after": 152.0,
+          "approved_at": "2026-10-13T23:52:43-04:00"
+        }
+      ],
+      "draft": null,
+      "usage": {
+        "requests": 10,
+        "tool_calls": 11,
+        "input_tokens": 17642,
+        "output_tokens": 1422
+      }
+    },
+    {
+      "id": 103,
+      "type": "price_override",
+      "requester": "Yale AI Club",
+      "final_status": "resolved",
+      "run_id": "run-103-2f451c",
+      "short_outcome": "Accounting quoted 10% off for 20 Basic Hoodie Big Yale in size M: $52.20 each, $1,044 total, a 57.9% margin. Inventory found 8 on hand, 12 short, and Bulldog can ship again with a 5-day lead time (ETA 2026-09-05). A quote draft is on the board. No purchase and no cash moved until the club accepts.",
+      "agents_in_order": [
+        "boss",
+        "accounting",
+        "inventory",
+        "customer_service"
+      ],
+      "delegations": [
+        "boss -> accounting",
+        "accounting -> inventory",
+        "boss -> customer_service"
+      ],
+      "agent_contributions": {
+        "boss": "Called accounting first: This is a price_override ticket, so accounting needed to establish an affordable bulk discount and quote first. Closed the ticket with resolve_ticket.",
+        "accounting": "The policy-compliant 10% bulk quote is $52.20 per hoodie, $1,044.00 total for 20, saving $116.00 versus the $1,160.00 list total. Unit cost is $22.00 and the resulting margin is $30.20/unit (57.9%), so no approval is needed or prepared; inventory reports 8 size-M units on hand and 12 short with a 5-day lead time (ETA 2026-09-05 if ordered today).",
+        "inventory": "Ticket 103 needs 20 CC-HOOD-NAVY hoodies in size M; 8 are on hand in Aisle A, leaving a shortage of 12. Bulldog Print Co is the apparel vendor, can ship without any blocking invoice, and has a 5-day lead time; ordered today, ETA is 2026-09-05.",
+        "customer_service": "Saved draft 2 addressed to Yale AI Club. It quotes 20 Basic Hoodie Big Yale hoodies in size M at $52.20 each ($1,044.00 total), saving $116.00 versus list; 8 are in stock now and the remaining 12 are expected around September 5, 2026 after confirmation."
+      },
+      "tools_used_by_agent": {
+        "boss": [
+          "get_ticket",
+          "resolve_ticket"
+        ],
+        "accounting": [
+          "get_pricing",
+          "quote_bulk_price",
+          "get_ticket"
+        ],
+        "inventory": [
+          "check_inventory",
+          "list_vendors",
+          "get_desk_date",
+          "check_vendor_can_ship"
+        ],
+        "customer_service": [
+          "get_ticket",
+          "list_drafts",
+          "create_draft_reply"
+        ]
+      },
+      "human_approvals": [],
+      "draft": {
+        "id": 2,
+        "recipient": "Yale AI Club",
+        "subject": "Your Basic Hoodie Big Yale bulk quote",
+        "status": "draft - not sent"
+      },
+      "usage": {
+        "requests": 14,
+        "tool_calls": 15,
+        "input_tokens": 26595,
+        "output_tokens": 2167
+      }
+    }
+  ]
+}

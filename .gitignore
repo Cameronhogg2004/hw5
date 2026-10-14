@@ -1,0 +1,15 @@
+# Secrets: never commit env files (the Portkey key lives in the course-root .env)
+.env
+.env.*
+
+# Environments and build output
+.venv/
+frontend/node_modules/
+frontend/dist/
+**/__pycache__/
+**/*.pyc
+**/.DS_Store
+*.tmp
+
+# Course data stays local (not redistributed): drop campus_customs.db into data/
+data/*.db
